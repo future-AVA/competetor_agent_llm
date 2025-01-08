@@ -7,3 +7,7 @@ duckduckgo-search
 transformers
 beautifulsoup4
 requests
+textblob
+pandas
+matplotlib
+seaborn
