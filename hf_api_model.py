@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
+# Load environment variables
 load_dotenv()
 
 class HfApiModel:
@@ -11,6 +11,6 @@ class HfApiModel:
         print(f"Initialized HfApiModel with ID: {model_id}")
 
     def run(self, prompt):
-        # Simulated model execution (replace with Hugging Face API call if needed)
-        print(f"Running model {self.model_id} with prompt: {prompt}")
-        return f"Generated response for: {prompt}"
+        # Simulate a call to the Hugging Face model
+        print(f"Model {self.model_id} executing prompt: {prompt}")
+        return f"Response from {self.model_id}: Generated output for '{prompt}'"
