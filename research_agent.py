@@ -1,5 +1,6 @@
 from smolagents import ToolCallingAgent, DuckDuckGoSearchTool
 from smoltools.jinaai import scrape_page_with_jina_ai
+from hf_api_model import HfApiModel
 
 def research_agent_function(topic):
     """Aggregates data from various sources."""
