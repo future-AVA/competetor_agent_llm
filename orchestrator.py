@@ -40,6 +40,11 @@ graph.add_node(Node("analysis", analysis_node, dependencies=["research"]))
 graph.add_node(Node("visualization", visualization_node, dependencies=["analysis"]))
 graph.add_node(Node("report", report_node, dependencies=["visualization"]))
 
+
 def orchestrate(topic):
     context = {"topic": topic}
-    return graph.run(context)["report"]
+    result = graph.run(context)
+    return {
+        "textual_report": result["report"]["report"],
+        "pdf_file": result["report"]["pdf_file"]
+    }
