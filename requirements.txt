@@ -1,0 +1,11 @@
+fpd
+gradio
+langgraph
+smolagents
+transformers
+pandas
+matplotlib
+seaborn
+textblob
+requests
+python-dotenv

@@ -1,50 +1,65 @@
-from langgraph import LangGraph, Node
-from memory_manager import MemoryManager
-from research_agent import research_agent_function
-from analysis_agent import analysis_agent_function
-from visualization_agent import visualization_agent_function
-from report_agent import report_generation_agent_function
+from smolagents import CodeAgent
+from agents.research_agent import get_research_agent
+from agents.analysis_agent import get_analysis_agent
+from agents.visualization_agent import generate_visualization, get_visualization_agent
+from agents.report_agent import generate_pdf_report, get_report_agent
 
-# Initialize LangGraph and Memory
-graph = LangGraph()
-memory = MemoryManager()
-
-#research agent (aggregate data from different websites)
-def research_node(context):
-    topic = context["topic"]
-    research_data = research_agent_function(topic)
-    memory.store("research_data", research_data)
-    return {"research_data": research_data}
-# analysis agent(COMPARISON &SWOT ANALYSIS)
-def analysis_node(context):
-    research_data = memory.retrieve("research_data")
-    analysis_result = analysis_agent_function(research_data)
-    memory.store("analysis_result", analysis_result)
-    return {"analysis_result": analysis_result}
-# Visualization Agent
-def visualization_node(context):
-    analysis_result = memory.retrieve("analysis_result")
-    visualization_output = visualization_agent_function(analysis_result)
-    memory.store("visualization_output", visualization_output)
-    return {"visualization_output": visualization_output}
-# Report Agent
-def report_node(context):
-    research_data = memory.retrieve("research_data")
-    analysis_result = memory.retrieve("analysis_result")
-    visualization_output = memory.retrieve("visualization_output")
-    return report_generation_agent_function(research_data, analysis_result, visualization_output)
-
-# Build graph
-graph.add_node(Node("research", research_node))
-graph.add_node(Node("analysis", analysis_node, dependencies=["research"]))
-graph.add_node(Node("visualization", visualization_node, dependencies=["analysis"]))
-graph.add_node(Node("report", report_node, dependencies=["visualization"]))
-
+def get_orchestrator():
+    """
+    Returns a configured CodeAgent for orchestrating the workflow.
+    This CodeAgent manages all the individual agents.
+    """
+    # Create CodeAgent with all managed agents
+    orchestrator = CodeAgent(
+        tools=[],  # Add any additional tools here if necessary
+        model=None,  # CodeAgent itself doesn't require a model
+        managed_agents=[
+            get_research_agent(),
+            get_analysis_agent(),
+            get_visualization_agent(),
+            get_report_agent(),
+        ],
+        additional_authorized_imports=["time", "pandas", "matplotlib"],  # Add necessary imports
+    )
+    return orchestrator
 
 def orchestrate(topic):
-    context = {"topic": topic}
-    result = graph.run(context)
-    return {
-        "textual_report": result["report"]["report"],
-        "pdf_file": result["report"]["pdf_file"]
-    }
+    """
+    Executes the workflow for the given topic using CodeAgent to manage all agents.
+    
+    Workflow:
+    - Research: Aggregate data on the topic.
+    - Analysis: Perform SWOT and sentiment analysis.
+    - Visualization: Generate data visualizations.
+    - Report Generation: Create a PDF report summarizing all findings.
+
+    Args:
+        topic (str): The topic to research and analyze.
+
+    Returns:
+        str: The path to the generated PDF report.
+    """
+    # Get the orchestrator
+    orchestrator = get_orchestrator()
+
+    print("[1/4] Running research agent...")
+    research_data = orchestrator.run(f"Aggregate data on {topic}")
+
+    print("[2/4] Running analysis agent...")
+    analysis_data = orchestrator.run(f"Perform SWOT analysis on: {research_data}")
+
+    print("[3/4] Running visualization agent...")
+    visualization_path = generate_visualization(analysis_data["swot"])
+
+    print("[4/4] Running report generation agent...")
+    report_path = generate_pdf_report(research_data, analysis_data, visualization_path)
+
+    print(f"Workflow completed. Report saved at: {report_path}")
+    return report_path
+
+if __name__ == "__main__":
+    # Example usage
+    topic = "AI startups in healthcare from 2020-2025"
+    print(f"Orchestrating workflow for topic: {topic}")
+    report_path = orchestrate(topic)
+    print(f"Final report available at: {report_path}")
