@@ -1,11 +1,9 @@
-fpd
-gradio
-langgraph
 smolagents
-transformers
+gradio
 pandas
 matplotlib
-seaborn
-textblob
-requests
+fpdf
 python-dotenv
+requests
+huggingface_hub
+transformers
