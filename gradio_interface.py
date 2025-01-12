@@ -27,17 +27,31 @@ def generate_reports_pipeline(input_query):
     report_path = generate_report(company_data, swot_results, visualizations)
     return report_path
 
+
 # Gradio interface
 with gr.Blocks() as interface:
-    gr.Markdown("# AI Startup Analysis Tool")
-    query_input = gr.Textbox(label="Enter Query", placeholder="e.g., AI startups in healthcare")
-    generate_button = gr.Button("Generate Report")
+    gr.Markdown(
+        """
+        # 🧠 **AI Startup Analysis Tool**
+        Analyze AI startups in any domain with **SWOT analysis**, **comparisons**, and **visualizations**.
+        Generate a comprehensive **PDF report** with recommendations for the top companies.
+        """
+    )
+
+    with gr.Row():
+        query_input = gr.Textbox(
+            label="Enter Query",
+            placeholder="e.g., AI startups in healthcare",
+            lines=1,
+        )
+        generate_button = gr.Button("Generate Report")
+
     output_file = gr.File(label="Download Report")
 
     generate_button.click(
         fn=generate_reports_pipeline,
         inputs=query_input,
-        outputs=output_file
+        outputs=output_file,
     )
 
 if __name__ == "__main__":

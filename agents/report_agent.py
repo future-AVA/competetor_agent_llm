@@ -5,7 +5,7 @@ class PDFReport(FPDF):
     Generates a professional PDF report with plain text, visualizations, and tables.
     """
     def header(self):
-        self.set_font('Arial', 'B', 12)
+        self.set_font('Arial', 'B', 22)
         self.cell(0, 10, 'AI Startup Analysis Report', align='C', ln=1)
 
     def footer(self):
@@ -57,7 +57,7 @@ def generate_report(company_data, swot_results, visualizations):
     pdf.add_page()
 
     # Add sections
-    pdf.add_section("Executive Summary", "AI startup analysis in healthcare.")
+    pdf.add_section("Executive Summary", "This report provides a detailed analysis of AI startups. It includes data collection, SWOT analysis, comparisons, and visualizations.The report identifies the top 3 companies in this domain based on the analysis.")
     pdf.add_section("Company Data", company_data)
     pdf.add_section("SWOT and Comparison Results", swot_results)
 

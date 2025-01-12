@@ -1,7 +1,6 @@
-import os
-from dotenv import load_dotenv
 from langchain.prompts import PromptTemplate
 from langchain_groq.chat_models import ChatGroq
+from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -15,14 +14,8 @@ def aggregate_data(query):
     Returns:
         str: Aggregated plain-text data.
     """
-    api_key = os.getenv("GROQ_API_KEY")
-    if not api_key:
-        raise ValueError("GROQ_API_KEY is not set in the environment variables.")
-
-    # Initialize the language model
     language_model = ChatGroq(model="llama-3.2-1b-preview", temperature=0.7, max_tokens=2000)
 
-    # Define the research prompt
     research_prompt = PromptTemplate(
         input_variables=["query"],
         template="""
@@ -48,6 +41,5 @@ def aggregate_data(query):
         """
     )
 
-    # Fetch aggregated data
     response = language_model.invoke(research_prompt.format(query=query))
     return response.content if hasattr(response, 'content') else str(response)
