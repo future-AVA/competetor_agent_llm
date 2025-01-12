@@ -59,7 +59,7 @@ python gradio_interface.py
 4. Access the Interface
 Open the provided URL in your browser (e.g., http://127.0.0.1:7860) to interact with the application.
 
-Usage
+## Usage
 Enter the topic for analysis in the Gradio interface.
 Example: "AI startups in healthcare from 2020-2025".
 Click the "Submit" button to start the workflow.
@@ -74,11 +74,8 @@ report_agent.py: Implements the report agent to compile results into a PDF.
 orchestrator.py: Coordinates all agents to execute the workflow.
 gradio_interface.py: Provides a Gradio-based user interface.
 Model
-The application uses the Hugging Face model tiiuae/falcon-7b-instruct for all tasks. The model is loaded with optimizations for CPU inference and low memory usage.
-
+The application uses the Hugging Face model tiiuae/falcon-7b-instruct for all tasks. The model is loaded with optimizations for CPU inference and low memory usag
 Directory Structure
-bash
-Copy code
 .
 ├── agents/
 │   ├── research_agent.py       # Research agent
@@ -90,17 +87,23 @@ Copy code
 ├── gradio_interface.py         # Gradio interface for the app
 ├── generated_reports/          # Directory for generated PDF reports
 └── README.md                   # Project documentation
-Example Workflow
+
+
+
+# Example Workflow
 Input:
 
 Topic: "AI startups in healthcare from 2020-2025".
-Workflow:
+# Workflow:
 
 The research agent aggregates data about the startups.
 The analysis agent identifies strengths, weaknesses, opportunities, and threats (SWOT).
 The visualization agent creates charts for SWOT results.
 The report agent compiles all data into a PDF report.
-Output:
+
+
+
+# Output:
 
 A downloadable PDF report with detailed findings.
 Limitations
