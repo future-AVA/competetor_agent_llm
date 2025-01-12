@@ -46,15 +46,16 @@ Install the required Python libraries:
 
 
 ```
-pip install smolagents gradio transformers pandas matplotlib fpdf
+pip install smolagents gradio transformers pandas matplotlib fpd
+
 ```
 3. Run the Application
-Launch the Gradio interface:
+- Launch the Gradio interface:
 
-bash
 ```
 python gradio_interface.py
-```
+
+
 
 4. Access the Interface
 Open the provided URL in your browser (e.g., http://127.0.0.1:7860) to interact with the application.
