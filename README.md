@@ -41,60 +41,76 @@ The orchestrator coordinates all agents to execute the workflow in the following
 ### **1. Clone the Repository**
 ```bash
 git clone https://github.com/your-username/ai-startup-analysis.git
+
 cd ai-startup-analysis
-2. Install Dependencies
+```
+### **2. Install Dependencies**
 Install the required Python libraries:
+```
+pip install - requirements.txt
+```
 
-bash
-Copy code
-pip install smolagents gradio transformers pandas matplotlib fpdf
-3. Run the Application
+### **3. Run the Application**
 Launch the Gradio interface:
-
-bash
-Copy code
+```
 python gradio_interface.py
-4. Access the Interface
+```
+### **4. Access the Interface**
 Open the provided URL in your browser (e.g., http://127.0.0.1:7860) to interact with the application.
 
-Usage
+### **Usage**
 Enter the topic for analysis in the Gradio interface.
 Example: "AI startups in healthcare from 2020-2025".
 Click the "Submit" button to start the workflow.
 Download the generated PDF report.
-Technical Overview
+## Technical Overview
 Core Scripts
-hf_api_model.py: Loads and initializes the shared Hugging Face model for CPU inference.
-research_agent.py: Implements the research agent to aggregate data.
-analysis_agent.py: Implements the analysis agent to perform SWOT and sentiment analysis.
-visualization_agent.py: Implements the visualization agent for generating charts.
-report_agent.py: Implements the report agent to compile results into a PDF.
-orchestrator.py: Coordinates all agents to execute the workflow.
-gradio_interface.py: Provides a Gradio-based user interface.
-Model
-The application uses the Hugging Face model tiiuae/falcon-7b-instruct for all tasks. The model is loaded with optimizations for CPU inference and low memory usage.
+- hf_api_model.py: Loads and initializes the shared Hugging Face model for CPU inference.
+- research_agent.py: Implements the research agent to aggregate data.
+- analysis_agent.py: Implements the analysis agent to perform SWOT and sentiment analysis.
+- visualization_agent.py: Implements the visualization agent for generating charts.
+- report_agent.py: Implements the report agent to compile results into a PDF.
+- orchestrator.py: Coordinates all agents to execute the workflow.
+- gradio_interface.py: Provides a Gradio-based user interface.
+## Model
+The application uses the groq llama 3.2 1b preview model. The model is loaded with optimizations for CPU inference and low memory usage.
 
-Directory Structure
-bash
-Copy code
+## Directory Structure
 .
 ├── agents/
+
 │   ├── research_agent.py       # Research agent
+
 │   ├── analysis_agent.py       # Analysis agent
+
 │   ├── visualization_agent.py  # Visualization agent
+
 │   ├── report_agent.py         # Report agent
+
 ├── orchestrator.py             # Orchestrator for workflow execution
+
 ├── hf_api_model.py             # Shared model loader
+
 ├── gradio_interface.py         # Gradio interface for the app
+
 ├── generated_reports/          # Directory for generated PDF reports
+
 └── README.md                   # Project documentation
-Example Workflow
-Input:
+
+
+.
+
+
+## Example Workflow
+**Input:**
 Topic: "AI startups in healthcare from 2020-2025".
-Workflow:
-The research agent aggregates data about the startups.
-The analysis agent identifies strengths, weaknesses, opportunities, and threats (SWOT).
-The visualization agent creates charts for SWOT results.
-The report agent compiles all data into a PDF report.
-Output:
+## Workflow:
+- The research agent aggregates data about the startups.
+- The analysis agent identifies strengths, weaknesses, opportunities, and threats (SWOT).
+- The visualization agent creates charts for SWOT results.
+- The report agent compiles all data into a PDF report.
+
+
+
+**Output:**
 A downloadable PDF report with detailed findings.
