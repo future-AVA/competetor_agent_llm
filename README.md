@@ -13,6 +13,13 @@ This project provides an end-to-end solution for analyzing AI startups and gener
 ---
 
 ## **Project Structure**
+
+
+<img src="https://github.com/future-AVA/competetor_agent_llm/blob/main/assets/chatbot%20-%20Page%204.png" alt="Logo" width="1000">
+
+## Introduction
+This is a description of the project.
+
 ### **Agents**
 1. **Research Agent**:
    - Aggregates data and summarizes it for further analysis.
