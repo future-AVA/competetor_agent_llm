@@ -1,4 +1,4 @@
-# **AI Startup Analysis Tool**
+# **🔎 AI Startup Analysis Tool**
 
 This project provides an end-to-end solution for analyzing AI startups and generating comprehensive reports, including SWOT analysis and visualizations. The project is structured into four agents, orchestrated to work together seamlessly.
 
@@ -76,27 +76,26 @@ Core Scripts
 The application uses the groq llama 3.2 1b preview model. The model is loaded with optimizations for CPU inference and low memory usage.
 
 ## Directory Structure
-.
+```
 ├── agents/
-
 │   ├── research_agent.py       # Research agent
-
 │   ├── analysis_agent.py       # Analysis agent
-
 │   ├── visualization_agent.py  # Visualization agent
-
 │   ├── report_agent.py         # Report agent
-
 ├── orchestrator.py             # Orchestrator for workflow execution
-
 ├── hf_api_model.py             # Shared model loader
-
 ├── gradio_interface.py         # Gradio interface for the app
-
 ├── generated_reports/          # Directory for generated PDF reports
-
 └── README.md                   # Project documentation
 
+```
+
+## Example .env File:
+```
+GROQ_API_KEY:
+HF_API_TOKEN:
+JINA_API_KEY:
+```
 
 .
 
